@@ -9,6 +9,7 @@
     <script src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
     <script src="https://meshblu.octoblu.com/js/skynet.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/2.4.1/lodash.js"></script>
 </head>
 <body>
 <div class="container">
@@ -71,7 +72,7 @@
     });
 
     conn.on('ready', function (data) {
-
+        var cryingList = [];
         console.log('Ready');
 
         var bedOccouped = $('.bedOccupied .alert');
@@ -91,14 +92,30 @@
             }
 
             if (data.topic === 'baby_crying') {
-                babyCrying.addClass('alert-danger');
-                babyCrying.removeClass('alert-success');
+                cryingList.push(data.val);
             }
 
             if (data.topic === 'baby_not_crying') {
+                cryingList.push(data.val);
+            }
+
+            if(cryingList.length > 5) {
+                cryingList.shift()
+            }
+
+            var cryingVolumeAvg = _.reduce(cryingList, function (memo, num) {
+                return memo + num;
+            }, 0) / cryingList.length;
+
+            if (cryingVolumeAvg > 300) {
+                babyCrying.addClass('alert-danger');
+                babyCrying.removeClass('alert-success');
+            } else {
                 babyCrying.addClass('alert-success');
                 babyCrying.removeClass('alert-danger');
             }
+
+            console.log('cryingVolumeAvg: ' + cryingVolumeAvg)
         });
 
         conn.subscribe(uuids.bedOccupied);
