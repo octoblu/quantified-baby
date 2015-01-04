@@ -14,7 +14,7 @@
 <div class="container">
     <div class="row">
         <nav class="navbar navbar-default">
-            <div class="container-fluid">
+            <div class="container-fluid ">
                 <!-- Brand and toggle get grouped for better mobile display -->
                 <div class="navbar-header">
                     <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
@@ -32,8 +32,8 @@
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav">
-                        <li class="active"><a href="index.html">Dashboard <span class="sr-only">(current)</span></a></li>
-                        <li><a href="charts.html">Charts</a></li>
+                        <li><a href="index.html">Dashboard <span class="sr-only">(current)</span></a></li>
+                        <li class="active"><a href="charts.html">Charts</a></li>
                     </ul>
                 </div><!-- /.navbar-collapse -->
             </div><!-- /.container-fluid -->
@@ -41,70 +41,39 @@
     </div>
     <div class="row">
         <div class="col-sm-12">
-            <div class="bedOccupied">
-                <h3>Bed Occupied</h3>
-                <div class="alert alert-success" role="alert">&nbsp;</div>
+            <h3>Matress Pressure</h3>
+            <div class="well well-lg">
+                <img src="http://api-m2x.att.com/v2/charts/6954e3f8dc320dfcf5fd71cbf2c40fe6.svg" height="100%" width="100%">
             </div>
         </div>
     </div>
     <div class="row">
         <div class="col-sm-12">
-            <div class="bedStatus">
-                <h3>Baby Crying</h3>
-                <div class="alert alert-danger" role="alert">&nbsp;</div>
+            <h3>Pressure Sensor 1</h3>
+            <div class="well well-lg">
+                <img src="http://api-m2x.att.com/v2/charts/9b865ac4fdaf6add4550e919538a5407.svg" height="100%" width="100%">
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12">
+            <h3>Pressure Sensor 2</h3>
+            <div class="well well-lg">
+                <img src="http://api-m2x.att.com/v2/charts/8d7d5a1e83e715514a6e83c4c0e1c06b.svg" height="100%" width="100%">
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12">
+            <h3>Sound Level</h3>
+            <div class="well well-lg">
+                <img src="http://api-m2x.att.com/v2/charts/642c5280d86a92a5586228f6a79c3f3d.svg" height="100%" width="100%">
             </div>
         </div>
     </div>
 </div>
 <script>
-    var uuids = {
-        bedOccupied: 'ee542991-9438-11e4-b15e-0bf92a1361c9'
-    };
 
-    var heartInterval;
-
-    var conn = skynet.createConnection({
-        "uuid": "240c1171-9451-11e4-b15e-0bf92a1361c9",
-        "token": "u60co2we2la3jtt9or5kwhzfarc9dx6r"
-    });
-
-    conn.on('ready', function (data) {
-
-        console.log('Ready');
-
-        var bedOccouped = $('.bedOccupied .alert');
-        var babyCrying = $('.babyCrying .alert');
-
-        conn.on('message', function(data){
-            console.log('Data received!', data);
-
-            if (data.topic === 'crib_occupied') {
-                bedOccouped.addClass('alert-success');
-                bedOccouped.removeClass('alert-danger');
-            }
-
-            if (data.topic === 'crib_unoccupied') {
-                bedOccouped.addClass('alert-danger');
-                bedOccouped.removeClass('alert-success');
-            }
-
-            if (data.topic === 'baby_crying') {
-                babyCrying.addClass('alert-success');
-                babyCrying.removeClass('alert-danger');
-            }
-
-            if (data.topic === 'baby_not_crying') {
-                babyCrying.addClass('alert-danger');
-                babyCrying.removeClass('alert-success');
-            }
-        });
-
-        conn.subscribe(uuids.bedOccupied);
-
-        conn.status(function (data) {
-            console.log(data);
-        });
-    });
 </script>
 </body>
 </html>
