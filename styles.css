@@ -1,0 +1,24 @@
+.baby {
+  background-image: url('images/baby.svg');
+  background-size: contain;
+  background-repeat: no-repeat;
+
+  height: 300px;
+}
+
+.baby.crying {
+  background-image: url('images/baby-crying.svg');
+}
+
+.crib {
+  background-image: url('images/crib.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+
+  height: 300px;
+}
+
+.crib.escaped {
+  background-image: url('images/baby-playing.svg');
+}
+

@@ -6,6 +6,7 @@
     <title></title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" type="text/css" href="styles.css">
     <script src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
     <script src="https://meshblu.octoblu.com/js/skynet.js"></script>
@@ -41,18 +42,16 @@
         </nav>
     </div>
     <div class="row">
-        <div class="col-sm-12">
+        <div class="col-xs-12 col-sm-6">
             <div class="bedOccupied">
                 <h3>Bed Occupied</h3>
-                <div class="alert alert-danger" role="alert">&nbsp;</div>
+                <div class="crib" role="alert">&nbsp;</div>
             </div>
         </div>
-    </div>
-    <div class="row">
-        <div class="col-sm-12">
+        <div class="col-xs-12 col-sm-6">
             <div class="babyCrying">
                 <h3>Baby Crying</h3>
-                <div class="alert alert-danger" role="alert">&nbsp;</div>
+                <div class="baby" role="alert">&nbsp;</div>
             </div>
         </div>
     </div>
@@ -75,30 +74,26 @@
         var cryingList = [];
         console.log('Ready');
 
-        var bedOccouped = $('.bedOccupied .alert');
-        var babyCrying = $('.babyCrying .alert');
+        var bedOccouped = $('.bedOccupied .crib');
+        var babyCrying = $('.babyCrying .baby');
 
         conn.on('message', function(data){
             console.log('Data received!', data);
 
             if (data.topic === 'crib_occupied') {
-                bedOccouped.addClass('alert-success');
-                bedOccouped.removeClass('alert-danger');
+                bedOccouped.removeClass('escaped');
             }
 
             if (data.topic === 'crib_unoccupied') {
-                bedOccouped.addClass('alert-danger');
-                bedOccouped.removeClass('alert-success');
+                bedOccouped.addClass('escaped');
             }
 
             if (data.topic === 'baby_crying') {
-                 babyCrying.addClass('alert-danger');
-                babyCrying.removeClass('alert-success');
+                 babyCrying.addClass('crying');
             }
 
             if (data.topic === 'baby_not_crying') {
-                babyCrying.addClass('alert-success');
-                babyCrying.removeClass('alert-danger');
+                babyCrying.removeClass('crying');
             }
         });
 
