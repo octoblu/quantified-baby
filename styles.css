@@ -2,6 +2,7 @@
   background-image: url('images/baby.svg');
   background-size: contain;
   background-repeat: no-repeat;
+  background-position: center center;
 
   height: 300px;
 }
@@ -11,14 +12,17 @@
 }
 
 .crib {
-  background-image: url('images/crib.png');
-  background-size: contain;
+  background: url('images/crib.png'),
+              url('images/baby-playing.svg');
+
+  background-size: contain, 50%;
+  background-position: center center;
   background-repeat: no-repeat;
 
   height: 300px;
 }
 
 .crib.escaped {
-  background-image: url('images/baby-playing.svg');
+  background-image: url('images/crib.png');
 }
 
