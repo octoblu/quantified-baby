@@ -92,30 +92,14 @@
             }
 
             if (data.topic === 'baby_crying') {
-                cryingList.push(data.val);
+                 babyCrying.addClass('alert-danger');
+                babyCrying.removeClass('alert-success');
             }
 
             if (data.topic === 'baby_not_crying') {
-                cryingList.push(data.val);
-            }
-
-            if(cryingList.length > 5) {
-                cryingList.shift()
-            }
-
-            var cryingVolumeAvg = _.reduce(cryingList, function (memo, num) {
-                return memo + num;
-            }, 0) / cryingList.length;
-
-            if (cryingVolumeAvg > 300) {
-                babyCrying.addClass('alert-danger');
-                babyCrying.removeClass('alert-success');
-            } else {
                 babyCrying.addClass('alert-success');
                 babyCrying.removeClass('alert-danger');
             }
-
-            console.log('cryingVolumeAvg: ' + cryingVolumeAvg)
         });
 
         conn.subscribe(uuids.bedOccupied);
